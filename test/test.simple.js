@@ -15,7 +15,8 @@ var fixture = {
   // truncate the test db file
   helper.reset(fixture.dbfile);
 
-  var db = new DB(fixture.dbfile, function() {
+  var db = new DB(fixture.dbfile, function(err) {
+    if(err) assert.fail(err);
     db.set(fixture.key, fixture.value, function() {
       db.get(fixture.key, function(value) {
         assert.equal(fixture.value, value);
