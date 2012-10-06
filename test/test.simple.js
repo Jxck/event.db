@@ -3,7 +3,7 @@ var assert = require('assert')
   , async = require('async')
   , helper = require('./helper');
 
-var DB = require('../');
+var DB = require('../lib/db');
 
 var fixture = {
     key: 'aaa'
