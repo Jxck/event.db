@@ -1,0 +1,26 @@
+{
+  "name": "event.db",
+  "version": "0.0.0",
+  "description": "evented kvs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "msgpack": "~0.1.5",
+    "async": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "kvs"
+  ],
+  "author": "Jxck",
+  "license": "BSD"
+}
