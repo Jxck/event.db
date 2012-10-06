@@ -17,8 +17,10 @@ var fixture = {
 
   var db = new DB(fixture.dbfile, function(err) {
     if(err) assert.fail(err);
-    db.set(fixture.key, fixture.value, function() {
-      db.get(fixture.key, function(value) {
+    db.set(fixture.key, fixture.value, function(err) {
+      if(err) assert.fail(err);
+      db.get(fixture.key, function(err, value) {
+        if(err) assert.fail(err);
         assert.equal(fixture.value, value);
       });
     });
@@ -42,9 +44,8 @@ var fixture = {
         return count < 6;
       },
       function(callback) {
-        log(key, val);
         db.set(key, val, function() {
-          db.get(key, function(value) {
+          db.get(key, function(err, value) {
             assert.equal(val, value);
             callback();
           });
