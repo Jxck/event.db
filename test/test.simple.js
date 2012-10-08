@@ -31,9 +31,13 @@ helper.test(function(next) {
       db.set(key, val, function() {
         db.get(key, function(err, value) {
           count++;
-          console.log('count', count);
           assert.equal(val, value);
-          count < MAXCOUNT ? set_get() : next();
+          if (count < MAXCOUNT) {
+            set_get();
+          } else {
+            console.log(count, 'times tested');
+            next();
+          }
         });
       });
     }
