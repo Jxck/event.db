@@ -1,6 +1,5 @@
 log = console.log;
 var assert = require('assert')
-  , async = require('async')
   , helper = require('./helper');
 
 var DB = require('../lib/db');
@@ -17,6 +16,7 @@ helper.test(function(next) {
 
   var db = new DB(fixture.dbfile, function() {
     var count = 0;
+    var MAXCOUNT = 10000;
     function random(len) {
       var result = '';
       for (var i = 0; i < len; i++) {
@@ -25,25 +25,19 @@ helper.test(function(next) {
       return result;
     }
 
-    async.whilst(
-      function() {
-        count++;
-        key = random(8);
-        val = random(248);
-        if (count == 10000) next();
-        return count < 10000;
-      },
-      function(callback) {
-        db.set(key, val, function() {
-          db.get(key, function(err, value) {
-            console.log('count', count);
-            //assert.equal(val, value);
-            callback();
-          });
+    function set_get() {
+      var key = random(8);
+      var val = random(248);
+      db.set(key, val, function() {
+        db.get(key, function(err, value) {
+          count++;
+          console.log('count', count);
+          assert.equal(val, value);
+          count < MAXCOUNT ? set_get() : next();
         });
-      },
-      console.error
-    );
+      });
+    }
+    set_get();
   });
 })(function(next) {
   // truncate the test db file
