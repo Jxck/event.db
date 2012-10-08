@@ -1,4 +1,1 @@
-var config = require('./config/sample')
-  , Server = require('./lib/server');
-
-Server(config);
+module.exports = require('./lib/server');
