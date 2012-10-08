@@ -1,4 +1,7 @@
-var assert = require('assert');
+var assert = require('assert')
+  , helper = require('./helper');
+
+helper.setConfig('test.json');
 
 var Row = require('../lib/row');
 

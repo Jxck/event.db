@@ -6,6 +6,14 @@ module.exports.reset = function(file) {
   fs.close(fd);
 };
 
+module.exports.setConfig = function(file) {
+  process.argv.push('--config');
+  process.argv.push(__dirname + '/config/' + file);
+  var config = require('../config')();
+  console.log(config.description);
+  return config;
+};
+
 module.exports.test = function test(fn) {
   if (!test.funcs) test.funcs = [];
   if (fn) {
