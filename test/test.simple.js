@@ -16,11 +16,11 @@ var fixture = {
   helper.reset(fixture.dbfile);
 
   var db = new DB(fixture.dbfile, function(err) {
-    if(err) assert.fail(err);
+    if (err) assert.fail(err);
     db.set(fixture.key, fixture.value, function(err) {
-      if(err) assert.fail(err);
+      if (err) assert.fail(err);
       db.get(fixture.key, function(err, value) {
-        if(err) assert.fail(err);
+        if (err) assert.fail(err);
         assert.equal(fixture.value, value);
       });
     });
@@ -34,8 +34,8 @@ var fixture = {
   var db = new DB(fixture.dbfile, function() {
     var count = 0;
     function random(len) {
-      var result="";
-      for(var i = 0; i < len; i++) {
+      var result = '';
+      for (var i = 0; i < len; i++) {
         result += String.fromCharCode(Math.floor(Math.random() * 25) + 65);
       }
       return result;

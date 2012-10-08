@@ -29,7 +29,7 @@ var Sockets = require('../lib/sockets');
   var count = 0;
   var Client = function() {}
   Client.prototype.write = function(message) {
-    count ++;
+    count++;
   }
 
   sockets.add(new Client());
