@@ -4,9 +4,10 @@ var utils = require('../lib/utils')
 
 (function test_key2hash() {
   // make key buffer to hash
-  var keybuf = new Buffer('aaa');
+  var keybuf = new Buffer('aaa')
+    , bucketsize = 100;
 
-  var actual = utils.key2hash(keybuf)
+  var actual = utils.key2hash(keybuf, bucketsize)
     , expected = 82;
 
   assert.equal(actual, expected);

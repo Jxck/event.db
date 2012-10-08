@@ -3,7 +3,8 @@
   "description": "this is test.db",
   "size": {
     "key": 0,
-    "value": 0
+    "value": 0,
+    "bucket": 100
   },
   "format": [
     "msgpack",
