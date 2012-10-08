@@ -1,0 +1,21 @@
+{
+  "file": "/tmp/test.db",
+  "description": "this is test.db",
+  "size": {
+    "key": 0,
+    "value": 0
+  },
+  "format": [
+    "msgpack",
+    "json",
+    "text"
+  ],
+  "transport": [
+    "tcp",
+    "websocket"
+  ],
+  "protocol": [
+    "msgpack-rpc",
+    "memcache"
+  ]
+}
