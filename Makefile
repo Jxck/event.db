@@ -6,8 +6,6 @@ lint:
 	fixjsstyle $(LIB) $(TESTS) $(CONFIG) index.js
 
 test:
-	@NODE_ENV=test node test/index.js\
-		--config $(PWD)/config/default.json
-
+	@NODE_ENV=test node test/index.js
 
 .PHONY: lint test
