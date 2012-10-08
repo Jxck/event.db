@@ -11,23 +11,7 @@ var fixture = {
   , dbfile: __dirname + '/../db/test.db'
 };
 
-(function() {
-  // truncate the test db file
-  helper.reset(fixture.dbfile);
-
-  var db = new DB(fixture.dbfile, function(err) {
-    if (err) assert.fail(err);
-    db.set(fixture.key, fixture.value, function(err) {
-      if (err) assert.fail(err);
-      db.get(fixture.key, function(err, value) {
-        if (err) assert.fail(err);
-        assert.equal(fixture.value, value);
-      });
-    });
-  });
-})();
-
-(function() {
+helper.test(function(next) {
   // truncate the test db file
   helper.reset(fixture.dbfile);
 
@@ -39,7 +23,6 @@ var fixture = {
         result += String.fromCharCode(Math.floor(Math.random() * 25) + 65);
       }
       return result;
-
     }
 
     async.whilst(
@@ -47,6 +30,7 @@ var fixture = {
         count++;
         key = random(8);
         val = random(248);
+        if (count == 10000) next();
         return count < 10000;
       },
       function(callback) {
@@ -60,5 +44,21 @@ var fixture = {
       },
       console.error
     );
+  });
+})(function(next) {
+  // truncate the test db file
+  helper.reset(fixture.dbfile);
+
+  var db = new DB(fixture.dbfile, function(err) {
+    if (err) assert.fail(err);
+    db.set(fixture.key, fixture.value, function(err) {
+      if (err) assert.fail(err);
+      db.get(fixture.key, function(err, value) {
+        if (err) assert.fail(err);
+        assert.equal(fixture.value, value);
+        console.log(fixture.value, value);
+        next();
+      });
+    });
   });
 })();
