@@ -1,11 +1,11 @@
 {
-  "file": "/tmp/test.db",
-  "description": "this is test.db",
+  "file": "/tmp/event.db",
+  "description": "default setting for event.db",
   "size": {
     "row": 256,
     "key": 8,
     "value": 248,
-    "bucket": 100
+    "bucket": 10000
   },
   "format": [
     "msgpack",

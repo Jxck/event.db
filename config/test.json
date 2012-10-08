@@ -1,0 +1,10 @@
+{
+  "file": "/tmp/test.db",
+  "description": "test setting for event.db",
+  "size": {
+    "row": 256,
+    "key": 8,
+    "value": 248,
+    "bucket": 100
+  }
+}
