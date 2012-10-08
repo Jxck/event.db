@@ -7,4 +7,4 @@ module.exports = (function() {
     configfile = __dirname + '/default.json';
   }
   return require(configfile);
-})();
+});
