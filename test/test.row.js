@@ -21,13 +21,13 @@ var fixture = {
 })();
 
 (function test_row_hash() {
-  var row = new Row(fixture.key, fixture.value);
+  var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.hash(), 66);
 })();
 
 (function test_row_offset() {
-  var row = new Row(fixture.key, fixture.value);
+  var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.writeOffset(),
                fixture.hash * row.size.row);
@@ -38,7 +38,7 @@ var fixture = {
 })();
 
 (function test_row_rowbuf() {
-  var row = new Row(fixture.key, fixture.value);
+  var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.ok(Buffer.isBuffer(row.rowbuf()));
 
