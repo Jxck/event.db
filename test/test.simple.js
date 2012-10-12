@@ -1,6 +1,7 @@
 log = function() {}; //console.log.bind(console);
 var assert = require('assert')
-  , helper = require('./helper');
+  , helper = require('./helper')
+  , test = helper.test();
 
 var DB = require('../lib/db');
 

@@ -1,14 +1,18 @@
 var assert = require('assert')
   , helper = require('./helper');
 
-helper.setConfig('test.json');
-
 var Row = require('../lib/row');
 
 var fixture = {
     key: 'aaa'
   , value: 'bbb'
   , hash: 66
+  , size: {
+    'row': 256,
+    'key': 8,
+    'value': 248,
+    'bucket': 100
+  }
 };
 
 (function test_new_row() {

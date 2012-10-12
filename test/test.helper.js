@@ -1,8 +1,8 @@
-var helper = require('./helper')
+var test = require('./helper').test()
   , assert = require('assert');
 
 var actual = [];
-helper.test(function(next) {
+test(function(next) {
   setTimeout(function() {
     actual.push(1);
     next();
@@ -21,5 +21,3 @@ helper.test(function(next) {
   assert.deepEqual(actual, [1, 2, 3]);
   next();
 })();
-
-
