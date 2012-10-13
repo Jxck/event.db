@@ -1,5 +1,6 @@
 # TODO
 
+- add getLineNumber to logger & add logger to helper
 - fix test/helper#test
 
 - document
