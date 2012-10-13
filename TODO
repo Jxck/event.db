@@ -1,6 +1,7 @@
 # TODO
 
-- Config File
+- fix test/helper#test
+
 - document
 - msgpack (RTC)
 - scale out with hub
