@@ -1,4 +1,5 @@
-var test = require('./helper').test()
+var helper = require('./helper')
+  , test = helper.test()
   , assert = require('assert');
 
 var actual = [];
@@ -20,4 +21,6 @@ test(function(next) {
 })(function(next) {
   assert.deepEqual(actual, [1, 2, 3]);
   next();
+})(function(next) {
+  assert.equal(helper.filename(__filename), 'test.helper.js');
 })();

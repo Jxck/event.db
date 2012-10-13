@@ -6,6 +6,11 @@ module.exports.reset = function(file) {
   fs.close(fd);
 };
 
+module.exports.filename = function(name) {
+  name = name.split('/');
+  return name[name.length - 1];
+};
+
 module.exports.test = function() {
   return function test(fn) {
     if (!test.funcs) test.funcs = [];
