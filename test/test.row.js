@@ -35,11 +35,53 @@ var count = 0;
   count++;
 })();
 
+(function test_row_checkbuffer() {
+  var row = new Row(fixture.key, fixture.value, fixture.size);
+
+  var dummy = new Buffer(fixture.size.row);
+  var actual = row.checkbuffer(dummy);
+  assert.equal(actual, false);
+
+  dummy = new Row(fixture.key + 'zzz', fixture.value, fixture.size);
+  var actual = row.checkbuffer(dummy.rowbuf);
+  assert.equal(actual, false);
+
+  dummy = new Row(fixture.key, fixture.value + 'zzz', fixture.size);
+  var actual = row.checkbuffer(dummy.rowbuf);
+  assert.equal(actual, true);
+
+  count++;
+})();
+
+(function test_row_makeview() {
+  var row = new Row(fixture.key, fixture.value, fixture.size);
+
+  var newkey = fixture.key + 'zzz';
+  var newvalue = fixture.value + 'zzz';
+
+  var row2 = new Row(newkey, newvalue, fixture.size);
+
+  row.rowbuf = row2.rowbuf;
+  row.makeview();
+
+  assert.equal(row.getKey(), newkey);
+  assert.equal(row.getValue(), newvalue);
+
+  count++;
+})();
+
 (function test_row_offset() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.offset(),
                fixture.hash * row.size.row);
+  count++;
+})();
+
+(function test_row_getKey() {
+  var row = new Row('   asdf  ');
+
+  assert.equal(row.getKey(), 'asdf');
   count++;
 })();
 
@@ -50,5 +92,5 @@ var count = 0;
   count++;
 })();
 
-assert.equal(count, 5);
+assert.equal(count, 7);
 console.log(count, 'test passed', __filename);
