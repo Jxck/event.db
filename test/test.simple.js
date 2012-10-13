@@ -36,7 +36,7 @@ test(function(next) {
           if (count < MAXCOUNT) {
             set_get();
           } else {
-            console.log(count, 'times tested');
+            assert.equal(count, 100);
             testcount++;
             return next();
           }
@@ -56,7 +56,7 @@ test(function(next) {
       db.get(fixture.key, function(err, value) {
         if (err) assert.fail(err);
         assert.equal(fixture.value, value);
-        console.log(fixture.value, value);
+        //console.log(fixture.value, value);
         testcount++;
         return next();
       });
