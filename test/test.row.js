@@ -17,6 +17,7 @@ var fixture = {
 
 var count = 0;
 (function test_new_row() {
+  // TODO: testing new Row(); pattern
   var row = new Row(fixture.key, fixture.value);
 
   assert.equal(row.key.length, row.size.key);
