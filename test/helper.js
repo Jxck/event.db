@@ -16,19 +16,19 @@ module.exports.log = function(name, testcount) {
 };
 
 module.exports.test = function() {
-  return function test(fn) {
-    if (!test.funcs) test.funcs = [];
+  return function tests(fn) {
+    if (!tests.funcs) tests.funcs = [];
     if (fn) {
-      test.funcs.push(fn);
-      return test;
+      tests.funcs.push(fn);
+      return tests;
     }
     function next() {
-      if (test.funcs.length) {
-        var fn = test.funcs.shift();
+      if (tests.funcs.length) {
+        var fn = tests.funcs.shift();
         fn(next);
       }
     }
-    var first = test.funcs.shift();
+    var first = tests.funcs.shift();
     return first(next);
   };
 };
