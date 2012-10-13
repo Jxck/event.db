@@ -15,7 +15,7 @@ var fixture = {
   }
 };
 
-var count = 0;
+var testcount = 0;
 (function test_new_row() {
   // TODO: testing new Row(); pattern
   var row = new Row(fixture.key, fixture.value);
@@ -26,14 +26,14 @@ var count = 0;
   assert.ok(Buffer.isBuffer(row.rowbuf));
   assert.ok(Buffer.isBuffer(row.keybuf));
   assert.ok(Buffer.isBuffer(row.valbuf));
-  count++;
+  testcount++;
 })();
 
 (function test_row_hash() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.hash(), 66);
-  count++;
+  testcount++;
 })();
 
 (function test_row_checkbuffer() {
@@ -51,7 +51,7 @@ var count = 0;
   var actual = row.checkbuffer(dummy.rowbuf);
   assert.equal(actual, true);
 
-  count++;
+  testcount++;
 })();
 
 (function test_row_makeview() {
@@ -68,7 +68,7 @@ var count = 0;
   assert.equal(row.getKey(), newkey);
   assert.equal(row.getValue(), newvalue);
 
-  count++;
+  testcount++;
 })();
 
 (function test_row_offset() {
@@ -76,22 +76,22 @@ var count = 0;
 
   assert.equal(row.offset(),
                fixture.hash * row.size.row);
-  count++;
+  testcount++;
 })();
 
 (function test_row_getKey() {
   var row = new Row('   asdf  ');
 
   assert.equal(row.getKey(), 'asdf');
-  count++;
+  testcount++;
 })();
 
 (function test_row_getValue() {
   var row = new Row(fixture.key, '   asdf  ');
 
   assert.equal(row.getValue(), 'asdf');
-  count++;
+  testcount++;
 })();
 
-assert.equal(count, 7);
-console.log(count, 'test passed', __filename);
+assert.equal(testcount, 7);
+helper.log(__filename, testcount);

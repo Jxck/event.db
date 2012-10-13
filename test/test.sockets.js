@@ -1,7 +1,9 @@
 var assert = require('assert');
 
-var Sockets = require('../lib/sockets');
+var Sockets = require('../lib/sockets')
+  , helper = require('./helper');
 
+var testcount = 0;
 
 (function() {
   // test socket new, add, remove, size
@@ -19,8 +21,8 @@ var Sockets = require('../lib/sockets');
 
   sockets.remove('client');
   assert.deepEqual(sockets.sockets, ['client2']);
+  testcount++;
 })();
-
 
 (function() {
   // test broadcast
@@ -40,4 +42,8 @@ var Sockets = require('../lib/sockets');
   sockets.broadcast('test');
 
   assert.equal(count, 3);
+  testcount++;
 })();
+
+assert.equal(testcount, 2);
+helper.log(__filename, testcount);

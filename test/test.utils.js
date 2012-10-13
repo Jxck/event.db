@@ -1,7 +1,8 @@
 var utils = require('../lib/utils')
+  , helper = require('./helper')
   , assert = require('assert');
 
-
+var testcount = 0;
 (function test_key2hash() {
   // make key buffer to hash
   var keybuf = new Buffer('aaa')
@@ -11,6 +12,7 @@ var utils = require('../lib/utils')
     , expected = 82;
 
   assert.equal(actual, expected);
+  testcount++;
 })();
 
 (function test_conflicts() {
@@ -23,6 +25,7 @@ var utils = require('../lib/utils')
   }
 
   //console.dir(hashes);
+  testcount++;
 })();
 
 (function test_normalize() {
@@ -35,6 +38,7 @@ var utils = require('../lib/utils')
     , expected = '     asdfg';
 
   assert.equal(actual, expected);
+  testcount++;
 })();
 
 (function test_normalize_args() {
@@ -44,5 +48,8 @@ var utils = require('../lib/utils')
     , expected = data;
 
   assert.equal(actual, expected);
+  testcount++;
 })();
 
+assert.equal(testcount, 4);
+helper.log(__filename, testcount);

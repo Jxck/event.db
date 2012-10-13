@@ -10,13 +10,14 @@ var fixture = {
   , dbfile: __dirname + '/../db/test.db'
 };
 
-helper.test(function(next) {
+var testcount = 0;
+test(function(next) {
   // truncate the test db file
   helper.reset(fixture.dbfile);
 
   var db = new DB(fixture.dbfile, function() {
     var count = 0;
-    var MAXCOUNT = 10000;
+    var MAXCOUNT = 100;
     function random(len) {
       var result = '';
       for (var i = 0; i < len; i++) {
@@ -36,7 +37,8 @@ helper.test(function(next) {
             set_get();
           } else {
             console.log(count, 'times tested');
-            next();
+            testcount++;
+            return next();
           }
         });
       });
@@ -55,8 +57,12 @@ helper.test(function(next) {
         if (err) assert.fail(err);
         assert.equal(fixture.value, value);
         console.log(fixture.value, value);
-        next();
+        testcount++;
+        return next();
       });
     });
   });
+})(function() {
+  assert.equal(testcount, 2);
+  helper.log(__filename, testcount);
 })();
