@@ -11,6 +11,10 @@ module.exports.filename = function(name) {
   return name[name.length - 1];
 };
 
+module.exports.log = function(name, testcount) {
+  console.error('\033[35m' + module.exports.filename(name) + ': ' + testcount + '\033[0m');
+};
+
 module.exports.test = function() {
   return function test(fn) {
     if (!test.funcs) test.funcs = [];
