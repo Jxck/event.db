@@ -15,43 +15,40 @@ var fixture = {
   }
 };
 
+var count = 0;
 (function test_new_row() {
   var row = new Row(fixture.key, fixture.value);
 
   assert.equal(row.key.length, row.size.key);
   assert.equal(row.value.length, row.size.value);
+  assert.equal(row.rowbuf.length, row.size.row);
+  assert.ok(Buffer.isBuffer(row.rowbuf));
   assert.ok(Buffer.isBuffer(row.keybuf));
   assert.ok(Buffer.isBuffer(row.valbuf));
+  count++;
 })();
 
 (function test_row_hash() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.hash(), 66);
+  count++;
 })();
 
 (function test_row_offset() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
-  assert.equal(row.writeOffset(),
+  assert.equal(row.offset(),
                fixture.hash * row.size.row);
-
-  assert.equal(row.readOffset(),
-               fixture.hash * row.size.row
-               + row.size.key);
+  count++;
 })();
 
-(function test_row_rowbuf() {
-  var row = new Row(fixture.key, fixture.value, fixture.size);
-
-  assert.ok(Buffer.isBuffer(row.rowbuf()));
-
-  assert.equal(row.rowbuf().length,
-               row.size.row);
-})();
-
-(function test_row_getValu() {
+(function test_row_getValue() {
   var row = new Row(fixture.key, '   asdf  ');
 
   assert.equal(row.getValue(), 'asdf');
+  count++;
 })();
+
+assert.equal(count, 5);
+console.log(count, 'test passed', __filename);
