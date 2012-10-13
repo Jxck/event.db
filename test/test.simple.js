@@ -1,4 +1,3 @@
-log = function() {}; //console.log.bind(console);
 var assert = require('assert')
   , helper = require('./helper')
   , test = helper.test();
