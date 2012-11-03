@@ -39,5 +39,4 @@ test(function() {
   assert.equal(count, 3);
 })(function() {
   assert.count(6);
-});
-
+})();
