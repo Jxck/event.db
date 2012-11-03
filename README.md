@@ -97,6 +97,21 @@ that will broadcasted to everyone,
 connected to database.
 
 
+## how to use
+
+```shell
+$ bin/index.js --config /path/to/config
+```
+
+```shell
+$ telnet 127.0.0.1
+set foo bar
+STORED
+get foo
+bar
+```
+
+
 ## License
 
 Author: Jxck
