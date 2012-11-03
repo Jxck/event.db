@@ -2,7 +2,6 @@ var test = require('nanotest')
   , assert = require('assert')
   , helper = require('./helper');
 
-
 var DB = require('../lib/db');
 
 var fixture = {
@@ -18,17 +17,10 @@ test(function(next) {
   var db = new DB(fixture.dbfile, function() {
     var count = 0;
     var MAXCOUNT = 100;
-    function random(len) {
-      var result = '';
-      for (var i = 0; i < len; i++) {
-        result += String.fromCharCode(Math.floor(Math.random() * 25) + 65);
-      }
-      return result;
-    }
 
     function set_get() {
-      var key = random(8);
-      var val = random(248);
+      var key = helper.random(8);
+      var val = helper.random(248);
       db.set(key, val, function() {
         db.get(key, function(err, value) {
           count++;

@@ -14,3 +14,11 @@ module.exports.filename = function(name) {
 module.exports.log = function(name, testcount) {
   console.error('\033[35m' + module.exports.filename(name) + ': ' + testcount + '\033[0m');
 };
+
+module.exports.random = function random(len) {
+  var result = '';
+  for (var i = 0; i < len; i++) {
+    result += String.fromCharCode(Math.floor(Math.random() * 25) + 65);
+  }
+  return result;
+};
