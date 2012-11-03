@@ -1,11 +1,9 @@
-var assert = require('assert');
+var test = require('nanotest')
+  , assert = require('assert');
 
-var Sockets = require('../lib/sockets')
-  , helper = require('./helper');
+var Sockets = require('../lib/sockets');
 
-var testcount = 0;
-
-(function() {
+test(function() {
   // test socket new, add, remove, size
   var sockets = new Sockets();
 
@@ -21,10 +19,7 @@ var testcount = 0;
 
   sockets.remove('client');
   assert.deepEqual(sockets.sockets, ['client2']);
-  testcount++;
-})();
-
-(function() {
+})(function() {
   // test broadcast
   var sockets = new Sockets();
 
@@ -42,8 +37,7 @@ var testcount = 0;
   sockets.broadcast('test');
 
   assert.equal(count, 3);
-  testcount++;
-})();
+})(function() {
+  assert.count(6);
+});
 
-assert.equal(testcount, 2);
-helper.log(__filename, testcount);

@@ -1,5 +1,5 @@
-var assert = require('assert')
-  , helper = require('./helper');
+var test = require('nanotest')
+  , assert = require('assert');
 
 var Row = require('../lib/row');
 
@@ -15,8 +15,7 @@ var fixture = {
   }
 };
 
-var testcount = 0;
-(function test_new_row() {
+test(function test_new_row() {
   // TODO: testing new Row(); pattern
   var row = new Row(fixture.key, fixture.value);
 
@@ -26,17 +25,11 @@ var testcount = 0;
   assert.ok(Buffer.isBuffer(row.rowbuf));
   assert.ok(Buffer.isBuffer(row.keybuf));
   assert.ok(Buffer.isBuffer(row.valbuf));
-  testcount++;
-})();
-
-(function test_row_hash() {
+})(function test_row_hash() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.hash(), 66);
-  testcount++;
-})();
-
-(function test_row_checkbuffer() {
+})(function test_row_checkbuffer() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   var dummy = new Buffer(fixture.size.row);
@@ -50,11 +43,7 @@ var testcount = 0;
   dummy = new Row(fixture.key, fixture.value + 'zzz', fixture.size);
   var actual = row.checkbuffer(dummy.rowbuf);
   assert.equal(actual, true);
-
-  testcount++;
-})();
-
-(function test_row_makeview() {
+})(function test_row_makeview() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   var newkey = fixture.key + 'zzz';
@@ -67,31 +56,17 @@ var testcount = 0;
 
   assert.equal(row.getKey(), newkey);
   assert.equal(row.getValue(), newvalue);
-
-  testcount++;
-})();
-
-(function test_row_offset() {
+})(function test_row_offset() {
   var row = new Row(fixture.key, fixture.value, fixture.size);
 
   assert.equal(row.offset(),
                fixture.hash * row.size.row);
-  testcount++;
-})();
-
-(function test_row_getKey() {
+})(function test_row_getKey() {
   var row = new Row('   asdf  ');
-
   assert.equal(row.getKey(), 'asdf');
-  testcount++;
-})();
-
-(function test_row_getValue() {
+})(function test_row_getValue() {
   var row = new Row(fixture.key, '   asdf  ');
-
   assert.equal(row.getValue(), 'asdf');
-  testcount++;
+})(function() {
+  assert.count(15);
 })();
-
-assert.equal(testcount, 7);
-helper.log(__filename, testcount);

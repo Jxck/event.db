@@ -1,6 +1,7 @@
-var assert = require('assert')
-  , helper = require('./helper')
-  , test = helper.test();
+var test = require('nanotest')
+  , assert = require('assert')
+  , helper = require('./helper');
+
 
 var DB = require('../lib/db');
 
@@ -10,7 +11,6 @@ var fixture = {
   , dbfile: __dirname + '/../db/test.db'
 };
 
-var testcount = 0;
 test(function(next) {
   // truncate the test db file
   helper.reset(fixture.dbfile);
@@ -37,7 +37,6 @@ test(function(next) {
             set_get();
           } else {
             assert.equal(count, 100);
-            testcount++;
             return next();
           }
         });
@@ -57,12 +56,10 @@ test(function(next) {
         if (err) assert.fail(err);
         assert.equal(fixture.value, value);
         //console.log(fixture.value, value);
-        testcount++;
         return next();
       });
     });
   });
 })(function() {
-  assert.equal(testcount, 2);
-  helper.log(__filename, testcount);
+  assert.count(102);
 })();

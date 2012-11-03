@@ -1,9 +1,8 @@
 var utils = require('../lib/utils')
-  , helper = require('./helper')
+  , test = require('nanotest')
   , assert = require('assert');
 
-var testcount = 0;
-(function test_key2hash() {
+test(function test_key2hash() {
   // make key buffer to hash
   var keybuf = new Buffer('aaa')
     , bucketsize = 100;
@@ -12,10 +11,7 @@ var testcount = 0;
     , expected = 82;
 
   assert.equal(actual, expected);
-  testcount++;
-})();
-
-(function test_conflicts() {
+})(function test_conflicts() {
   // you can see the conflicts of hash
   n = 100;
   hashes = {};
@@ -25,10 +21,7 @@ var testcount = 0;
   }
 
   //console.dir(hashes);
-  testcount++;
-})();
-
-(function test_normalize() {
+})(function test_normalize() {
   // make data length to len
   // padding with blank
   var data = 'asdfg'
@@ -38,18 +31,13 @@ var testcount = 0;
     , expected = '     asdfg';
 
   assert.equal(actual, expected);
-  testcount++;
-})();
-
-(function test_normalize_args() {
+})(function test_normalize_args() {
   // no length returns data with no change
   var data = 'asdfg'
     , actual = utils.normalize(data)
     , expected = data;
 
   assert.equal(actual, expected);
-  testcount++;
+})(function() {
+  assert.count(3);
 })();
-
-assert.equal(testcount, 4);
-helper.log(__filename, testcount);
