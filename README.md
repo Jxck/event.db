@@ -1,5 +1,7 @@
 # Event.db
 
+[![Build Status](https://secure.travis-ci.org/Jxck/event.db.png)](http://travis-ci.org/Jxck/event.db)
+
 evented kvs
 (heavily under developing)
 
